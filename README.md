@@ -1,0 +1,2 @@
+# Jeux_SuivreLeader
+j'ai réalisé la plupart des fonctions demandé - la touche L permettant de passer du mode suivi du point derriere le leader au mode quelele - j'ai ajouté des ennemies qui meurt apres trois coup . en plus de ca j'ai ajouté des balles qui ont un behaviour arrive en evers les ennemies et qui disparaissrnt si la distance entre le eux est petite ,En outre les vehicules derriere le leader forme un boid quand on switch de mode .
