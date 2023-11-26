@@ -1,14 +1,15 @@
+// Déclaration des variables
 let vehicles = [];
 let enemies = [];
 let shooting = false;
 let bullets = [];
 let useBehavior1 = true;
-let target; // Declare target at a higher scope
+let target; // Déclaration de la cible à une portée supérieure
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  // Create 10 vehicles with random positions
+  // Création de 10 véhicules avec des positions aléatoires
   for (let i = 0; i < 10; i++) {
     let v = new Vehicle(random(width), random(height));
     v.maxSpeed = 5;
@@ -18,24 +19,24 @@ function setup() {
 }
 
 function drawStars(numStars) {
-  fill(255); // Set the fill color to white
-  noStroke(); // No outline for stars
+  fill(255); // Définir la couleur de remplissage en blanc
+  noStroke(); // Pas de contour pour les étoiles
 
   for (let i = 0; i < numStars; i++) {
     let x = random(width);
     let y = random(height);
-    ellipse(x, y, 2, 2); // Draw small ellipses as stars
+    ellipse(x, y, 2, 2); // Dessiner de petits ellipses comme étoiles
   }
 }
 
 function draw() {
   background(0);
 
-  // Draw stars
+  // Dessiner les étoiles
   drawStars(100);
 
   if (useBehavior1) {
-    // Behavior 1
+    // Comportement 1
     if (frameCount % 30 === 0) {
       for (let v of vehicles) {
         for (let enemy of enemies) {
@@ -48,37 +49,37 @@ function draw() {
     if (shooting) {
       let enemy = new Enemy(mouseX, mouseY);
       enemies.push(enemy);
-      shooting = false; // Stop spawning enemies
+      shooting = false; // Arrêter de générer des ennemis
     }
 
-    // Update and draw the enemies
+    // Mettre à jour et dessiner les ennemis
     for (let i = enemies.length - 1; i >= 0; i--) {
       let enemy = enemies[i];
       enemy.update();
       enemy.show();
 
-      // Check if a bullet hits the enemy
+      // Vérifier si une balle touche l'ennemi
       for (let j = bullets.length - 1; j >= 0; j--) {
         let bullet = bullets[j];
         let d = dist(bullet.pos.x, bullet.pos.y, enemy.pos.x, enemy.pos.y);
         if (d < 10) {
-          bullets.splice(j, 1); // Remove the bullet
-          enemy.hp -= 10; // Decrease enemy HP
+          bullets.splice(j, 1); // Supprimer la balle
+          enemy.hp -= 10; // Diminuer les points de vie de l'ennemi
         }
       }
-      // Remove dead enemies
+      // Supprimer les ennemis morts
       if (enemy.isDead()) {
         enemies.splice(i, 1);
       }
     }
 
-    // Update and draw the bullets
+    // Mettre à jour et dessiner les balles
     for (let i = bullets.length - 1; i >= 0; i--) {
       let bullet = bullets[i];
       bullet.update();
       bullet.show();
 
-      // Check if the bullet is out of bounds
+      // Vérifier si la balle est hors des limites
       if (
         bullet.pos.x < 0 ||
         bullet.pos.x > width ||
@@ -123,7 +124,7 @@ function draw() {
       
     }
   } else {
-    // Behavior 2
+    // Comportement 2
     target = createVector(mouseX, mouseY);
     fill(82, 221, 137);
     noStroke();
@@ -157,34 +158,34 @@ function draw() {
   
       
   
-      // Update and draw the enemies
+      // Mettre à jour et dessiner les ennemis
       for (let i = enemies.length - 1; i >= 0; i--) {
         let enemy = enemies[i];
         enemy.update();
         enemy.show();
   
-        // Check if a bullet hits the enemy
+        // Vérifier si une balle touche l'ennemi
         for (let j = bullets.length - 1; j >= 0; j--) {
           let bullet = bullets[j];
           let d = dist(bullet.pos.x, bullet.pos.y, enemy.pos.x, enemy.pos.y);
           if (d < 10) {
-            bullets.splice(j, 1); // Remove the bullet
-            enemy.hp -= 10; // Decrease enemy HP
+            bullets.splice(j, 1); // Supprimer la balle
+            enemy.hp -= 10; // Diminuer les points de vie de l'ennemi
           }
         }
-        // Remove dead enemies
+        // Supprimer les ennemis morts
         if (enemy.isDead()) {
           enemies.splice(i, 1);
         }
       }
   
-      // Update and draw the bullets
+      // Mettre à jour et dessiner les balles
       for (let i = bullets.length - 1; i >= 0; i--) {
         let bullet = bullets[i];
         bullet.update();
         bullet.show();
   
-        // Check if the bullet is out of bounds
+        // Vérifier si la balle est hors des limites
         if (
           bullet.pos.x < 0 ||
           bullet.pos.x > width ||
@@ -200,14 +201,14 @@ function draw() {
 
 function keyPressed() {
   if (key === 'l') {
-    // Toggle between behavior 1 and behavior 2
+    // Basculer entre le comportement 1 et le comportement 2
     useBehavior1 = !useBehavior1;
   }
 }
 
-// Check if the mouse is clicked
+// Vérifier si la souris est cliquée
 function mousePressed() {
-  shooting = true; // Start spawning enemies
+  shooting = true; // Commencer à générer des ennemis
   for (let v of vehicles) {
     let enemy = new Enemy(mouseX, mouseY);
     enemies.push(enemy);
